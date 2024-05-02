@@ -1,31 +1,36 @@
-@RestResource(urlMapping='/OrderInsert/*')
-global with sharing class OrderInsert {
+@RestResource(urlMapping='/upsertAccount/*')
+global with sharing class AccountUpsert {
 
     @HttpPost
-    global static String insertOrder(String accountId, String orderName) {
+    global static String upsertAccount(String accountId, String accountName) {
         try {
-            // Verifica se os campos obrigatórios estão presentes
-            if (String.isBlank(orderName) || String.isBlank(accountId)) {
-                return 'Erro: O campo Nome e Conta são obrigatórios.';
+            // Verifica se o usuário tem permissão de criar ou atualizar contas
+            if (!Schema.sObjectType.Account.isCreateable() || !Schema.sObjectType.Account.isUpdateable()) {
+                return 'Usuário não tem permissão para criar ou atualizar contas.';
             }
             
-            // Verifica se a Conta associada existe e se o usuário tem permissão para acessá-la
-            Account acc = [SELECT Id, Name FROM Account WHERE Id = :accountId LIMIT 1];
-            if (acc == null) {
-                return 'Erro: A Conta associada não existe.';
+            Account acc;
+            if (accountId != null && accountId != '') {
+                // Verifica se o usuário tem permissão para acessar a conta
+                if (!Schema.sObjectType.Account.isAccessible()) {
+                    return 'Usuário não tem permissão para acessar a conta.';
+                }
+                
+                acc = [SELECT Id, Name FROM Account WHERE Id = :accountId];
+                acc.Name = accountName;
+                update acc;
+            } else {
+                // Verifica se o usuário tem permissão para criar contas
+                if (!Schema.sObjectType.Account.isCreateable()) {
+                    return 'Usuário não tem permissão para criar contas.';
+                }
+                
+                acc = new Account(Name = accountName);
+                insert acc;
             }
-            
-            // Cria o pedido
-            Order__c newOrder = new Order__c(
-                Name = orderName,
-                Conta__c = accountId
-            );
-            
-            insert newOrder;
-            
-            return 'Pedido inserido com sucesso';
+            return 'Conta ' + acc.Id + ' upserted com sucesso.';
         } catch (Exception e) {
-            return 'Erro ao inserir pedido: ' + e.getMessage();
+            return 'Erro ao upsertar conta: ' + e.getMessage();
         }
     }
 }
