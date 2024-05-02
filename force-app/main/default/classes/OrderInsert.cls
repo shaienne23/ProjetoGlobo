@@ -1,5 +1,31 @@
-public with sharing class OrderInsert {
-    public OrderInsert() {
+@RestResource(urlMapping='/OrderInsert/*')
+global with sharing class OrderInsert {
 
+    @HttpPost
+    global static String insertOrder(String accountId, String orderName) {
+        try {
+            // Verifica se os campos obrigatórios estão presentes
+            if (String.isBlank(orderName) || String.isBlank(accountId)) {
+                return 'Erro: O campo Nome e Conta são obrigatórios.';
+            }
+            
+            // Verifica se a Conta associada existe e se o usuário tem permissão para acessá-la
+            Account acc = [SELECT Id, Name FROM Account WHERE Id = :accountId LIMIT 1];
+            if (acc == null) {
+                return 'Erro: A Conta associada não existe.';
+            }
+            
+            // Cria o pedido
+            Order__c newOrder = new Order__c(
+                Name = orderName,
+                Conta__c = accountId
+            );
+            
+            insert newOrder;
+            
+            return 'Pedido inserido com sucesso';
+        } catch (Exception e) {
+            return 'Erro ao inserir pedido: ' + e.getMessage();
+        }
     }
 }
