@@ -9,7 +9,7 @@ global with sharing class OrderInsert {
                 return 'Erro: O campo Nome e Conta são obrigatórios.';
             }
             
-            // Verifica se a Conta associada existe e se o usuário tem permissão para acessá-la
+            // Verifica se a Conta associada existe 
             Account acc = [SELECT Id, Name FROM Account WHERE Id = :accountId LIMIT 1];
             if (acc == null) {
                 return 'Erro: A Conta associada não existe.';
