@@ -2,7 +2,7 @@
 global with sharing class OrderInsert {
 
     @HttpPost
-    global static String insertOrder(String accountId, String orderName) {
+    global static String insertOrder(String accountId, String orderName, String  orderValor, String orderData, String orderPrazo) {
         try {
             // Verifica se os campos obrigatórios estão presentes
             if (String.isBlank(orderName) || String.isBlank(accountId)) {
@@ -16,9 +16,12 @@ global with sharing class OrderInsert {
             }
             
             // Cria o pedido
-            Order__c newOrder = new Order__c(
+              Order__c newOrder = new Order__c(
                 Name = orderName,
-                Conta__c = accountId
+                Conta__c = accountId,
+                Valor_Total_Pedido__c = Decimal.valueOf(orderValor),
+                Data_Inicio_Pedido__c = Date.valueOf(orderData),
+                Prazo_Meses__c = orderPrazo
             );
             
             insert newOrder;
