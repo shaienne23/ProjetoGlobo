@@ -1,33 +1,38 @@
 public with sharing class AccountTrigger {
   @AuraEnabled
-  public static void sendEmailNotification(List<Account> AccList){
-    List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
+  public static void sendEmailOnInsert(List<Account> accList){
+      sendEmailNotification(accList, 'Obrigado por se cadastrar!<br/><br/>'+
+      'Globo.com<br/><br/>');
+  }
 
-    for(Account acc : AccList){
-        if(acc.Email__c != null){
-            Messaging.SingleEmailMessage emailMsg = new Messaging.SingleEmailMessage();
-            String[] toAddresses = new String[] {acc.Email__c};
-            emailMsg.setToAddresses(toAddresses);
-            String emailSub = 'Bem-vindo ' + acc.Name;
-            emailMsg.setSubject(emailSub);
-            String disName = 'Bem-vindo Notificação - Shai';
-            emailMsg.setSenderDisplayName(disName);
+  @AuraEnabled
+  public static void sendEmailOnUpdate(List<Account> accList){
+      sendEmailNotification(accList, 'Seu perfil foi atualizado!<br/><br/>'+
+      'Globo.com<br/><br/>');
+  }
 
-            String content = 'Olá ' + acc.Name + ', <br/><br/>'+
-                'Bem-vindo à Globo!<br/><br/>';
-                
+  @AuraEnabled
+  public static void sendEmailNotification(List<Account> accList, String additionalContent){
+      List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
 
-                if(isInsert){
-                  content += '<br/><br/> Obrigado por se cadastrar!';
-              }
-                if(isUpdate){
-                  content += '<br/><br/> Seu perfil foi atualizado!';
-              }
+      for(Account acc : accList){
+          if(acc.Email__c != null){
+              Messaging.SingleEmailMessage emailMsg = new Messaging.SingleEmailMessage();
+              String[] toAddresses = new String[] {acc.Email__c};
+              emailMsg.setToAddresses(toAddresses);
+              String emailSub = 'Olá ' + acc.Name;
+              emailMsg.setSubject(emailSub);
+              String disName = 'Notificação - Globo.com';
+              emailMsg.setSenderDisplayName(disName);
 
-            emailMsg.setHtmlBody(content);
-            emailList.add(emailMsg);
-        }
-    }
-    Messaging.sendEmail(emailList);
-}
+              String content = 'Olá ' + acc.Name + ', <br/><br/>'+
+                  'A equipe Globo, fica feliz em te-lo conosco!<br/><br/>' + 
+                  additionalContent;
+
+              emailMsg.setHtmlBody(content);
+              emailList.add(emailMsg);
+          }
+      }
+      Messaging.sendEmail(emailList);
+  }
 }

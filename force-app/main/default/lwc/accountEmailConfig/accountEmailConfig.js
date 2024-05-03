@@ -15,20 +15,28 @@ export default class AccountEmailConfig extends LightningElement {
     }
 
     handleSuccess(event) {
-        const accountId = event.detail.id;
-        const action = this.sendEmail ? 'ativar' : 'desativar';
-        this.message = `Enviando email após ${action} a atualização da conta...`;
+      const accountId = event.detail.id;
+      const action = this.sendEmail ? 'ativar' : 'desativar';
 
-        // Chamar o método Apex para enviar email
-        sendEmailNotification({accountId: accountId})
-            .then(result => {
-                const successMessage = `O estado de envio de e-mail foi ${action} com sucesso.`;
-                this.showToast('Sucesso', successMessage, 'success');
-            })
-            .catch(error => {
-                this.showToast('Erro', 'Ocorreu um erro ao enviar o e-mail.', 'error');
-            });
-    }
+  
+      // Chamar o método Apex para enviar email
+      sendEmailNotification({ accList: [{Id: accountId}], additionalContent: '' })
+          .then(result => {
+            const successMessage = `Cadastro realizado com sucesso.`;
+              this.showToast('Sucesso', successMessage, 'success');
+  
+              // Resetar os campos de entrada após o sucesso
+              const inputFields = this.template.querySelectorAll('lightning-input-field');
+              if (inputFields) {
+                  inputFields.forEach((field) => field.reset());
+              }
+          })
+          .catch(error => {
+            this.showToast('Erro', 'Ocorreu um erro ao inserir o cadastro.', 'error');
+        });
+          
+  }
+  
 
     handleChange(event) {
         this.areSendEmail = event.target.checked;
