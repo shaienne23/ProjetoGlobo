@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Cadastro" icon-name="custom:custom15">
+        <!-- Campos de entrada -->
+        <lightning-record-edit-form object-api-name="Account" onsuccess={handleSuccess}>
+            <lightning-input-field field-name="Name"></lightning-input-field>
+            <lightning-input-field field-name="Phone"></lightning-input-field>
+            <div>
+                <template if:true={areSendEmail}>
+                    <lightning-input-field field-name="Email__c" onchange={handleEmailChange}></lightning-input-field>
+                </template>
+
+                <template if:false={areSendEmail}>
+                    Selecione o Checkbox, para cadastro e envio de Email!!
+                </template>
+            </div>
+            <lightning-input-field type="checkbox" label="Enviar Email" checked={sendEmail}
+                onchange={handleSendEmailChange}></lightning-input-field>
+            <div class="checkbox-wrapper">
+                <lightning-input type="checkbox" class="custom-checkbox" label="Cadastrar Email"
+                    onchange={handleChange}></lightning-input>
+            </div>
+
+
+            <!-- Exibição da mensagem -->
+            <div class="message">{message}</div>
+            <lightning-button class="slds-m-top_small" variant="brand" type="submit"
+                label="Criar Conta"></lightning-button>
+        </lightning-record-edit-form>
+    </lightning-card>
+</template>
