@@ -1,0 +1,32 @@
+.input {
+    background-color: #d0ecea;/* Cor conforme calculadora*/
+    border: 1px solid #d8d8d8; /* Adiciona uma borda de 1 pixel sólido cinza */
+    border-radius: 4px; /* Adiciona cantos arredondados */
+    padding: 0.5rem; /* Adiciona um preenchimento interno */
+    font-weight: bold;
+}
+
+.cards {
+    width: 100%; /* Define a largura do card */
+    height: 230px; /* Define a altura do card */
+    padding: 30px; /* Adiciona espaço interno ao card */
+    
+}
+
+.forms {
+    border-style: solid; /* Define o estilo da borda como "solid" */
+    border-radius: 10px; /* Define o raio dos cantos como 10 pixels, criando cantos arredondados */
+    color: #54787d; /* Define a cor do texto dentro do elemento como #54787d */
+    background-color: rgb(253, 255, 255); /* Define a cor de fundo do elemento como um branco levemente azulado */
+}
+
+
+:host .custom-container {
+    display: flex; /* Define o elemento como um contêiner flexível */
+    margin-top: 3px; /* Adiciona 3 pixels de margem superior */
+    justify-content: right; /* Alinha os itens ao longo do eixo principal do contêiner à direita */
+    align-items: right; /* Alinha os itens ao longo do eixo transversal do contêiner à direita */
+    margin-right: 18px; /*alinhamento de margens em relação ao componente */
+    font-size: 16px; /* Define o tamanho da fonte como 16 pixels */
+    letter-spacing: 0.5px; /* Define o espaçamento entre letras como 0.5 pixels */
+}

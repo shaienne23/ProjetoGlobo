@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Vitrine" icon-name="custom:custom17">
+        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+            <template if:true={mostrarEvento1}>
+                <img class="imagem" src={evento1} alt="Conheça o Cartola" />
+            </template>
+            <template if:true={mostrarEvento2}>
+                <img class="imagem" src={evento2} alt="Conheça o combate" />
+            </template>
+
+            <strong><lightning-button class="slds-m-around_medium" variant="neutral" label="Vizualize a Vitrine"
+                    onclick={ocultarImagem}></lightning-button></strong>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Listar Contatos Recentes" icon-name="custom:custom16">
+        <ul class="slds-m-around_medium">
+            <template for:each={wiredContact.data} for:item="contact">
+                <li key={contact.Id}>{contact.Name}, {contact.Phone}, {contact.Title}</li>
+            </template>
+        </ul>
+    </lightning-card>
+</template>

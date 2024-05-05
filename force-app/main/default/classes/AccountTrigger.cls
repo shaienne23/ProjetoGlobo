@@ -35,4 +35,5 @@ public with sharing class AccountTrigger {
       }
       Messaging.sendEmail(emailList);
   }
+  
 }

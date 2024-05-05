@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Listar Contas Recentes" icon-name="custom:custom16">
+        <ul class="slds-m-around_medium">
+            <template for:each={wiredAccount.data} for:item="account">
+                <li key={account.Id}>{account.Name}, {account.Phone}, {account.Type}</li>
+            </template>
+        </ul>
+    </lightning-card>
+</template>

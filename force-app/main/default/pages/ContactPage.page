@@ -1,0 +1,102 @@
+<apex:page standardController="Contact" extensions="ContactController">
+    
+    <apex:slds />
+    
+    <style>
+        #Cadastrar {
+        border: solid;
+        margin-bottom: 20%;
+        font-family: "Arial", sans-serif; 
+        font-weight: bold;
+        font-size: 15px; 
+        letter-spacing: 0.5px;
+        background-color: #d0ecea;
+        border: 1px solid #ccc; 
+        border-radius: 4px; <!-- azul claro cadastrar-->
+        padding: 0.5rem; 
+        
+        }
+        .meuBotao {
+        
+        box-sizing: border-box;
+        display: block;
+        width: 380px;
+        background-color: #d0ecea;
+        color: black;
+        float: right; 
+        font-family: "Arial", sans-serif; 
+        font-weight: bold;
+        font-size: 16px; 
+        letter-spacing: 0.5px; 
+        
+        }
+        
+        
+        #forme {
+        border-style: solid;
+        border-radius: 10px;
+        color: #54787d;
+        }
+        
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-image: linear-gradient(#d0ecea, white);
+        }
+    </style>
+    
+    <div id="Cadastrar">
+        <div id="forme">
+            <apex:pageMessages />
+            <apex:pageBlock title="Cadastrar Contato">
+                <apex:form >
+                    <apex:panelGrid columns="1">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-46">
+                                <abbr class="slds-required" title="required">* </abbr><strong>Nome</strong></label>
+                            <div class="slds-form-element__control">
+                                <apex:inputText value="{!Nome}" styleClass="slds-input"/>
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-69">
+                                <abbr class="slds-required" title="required">* </abbr><strong>Sobrenome</strong></label>
+                            <div class="slds-form-element__control">
+                                <apex:inputText value="{!Sobrenome}" styleClass="slds-input"/>
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-70">
+                                <abbr> </abbr><strong>Cargo</strong></label>
+                            <div class="slds-form-element__control">
+                                <apex:inputText value="{!Cargo}" styleClass="slds-input"/>
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-71">
+                                <abbr> </abbr><strong>Celular</strong></label>
+                            <div class="slds-form-element__control">
+                                <apex:inputText value="{!Celular}" styleClass="slds-input"/>
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-72">
+                                <abbr> </abbr><strong>Departamento</strong></label>
+                            <div class="slds-form-element__control">
+                                <apex:inputText value="{!Departamento}" styleClass="slds-input"/>
+                            </div><br/>
+                            
+                            <div>
+                                <apex:commandButton value="Criar Novo Contato" action="{!salvarContact}" styleClass="meuBotao" immediate="false"/>
+                            </div>
+                        </div>
+                    </apex:panelGrid>
+                    
+                    
+                    
+                </apex:form>
+            </apex:pageBlock>
+        </div>
+    </div>
+</apex:page>

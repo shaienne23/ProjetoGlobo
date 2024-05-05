@@ -1,0 +1,52 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="lstNumbers" type="List" default="[]"/>
+    <aura:attribute name="strOperator" type="String"/>
+    <aura:attribute name="strCurrentNumber" type="String" default=""/>
+    <aura:attribute name="strInput" type="String" default=""/>
+    <aura:attribute name="result" type="Integer" default="0"/>
+    
+    <lightning:card title="Calculadora">
+        <div id="mainDiv" class="slds-p-around_medium">
+            <div id="ioDiv">
+                <div id="inputDiv">{!v.strInput}</div>
+                <div id="outputDiv">{!v.result}</div>
+            </div>
+            <div id="operationsDiv">
+                <table>
+                    <tr>
+                        <td class="operator" onclick="{!c.clearClicked}">C</td>
+                        <td class="operator" onclick="{!c.clearLastNumberClicked}">← </td>
+                        <td class="operator" onclick="{!c.operatorClicked}">% </td>
+                        <td class="operator" onclick="{!c.operatorClicked}">/ </td>
+                    </tr>
+                    <tr>
+                        <td onclick="{!c.numberClicked}">7 </td>
+                        <td onclick="{!c.numberClicked}">8 </td>
+                        <td onclick="{!c.numberClicked}">9 </td>
+                        <td class="operator" onclick="{!c.operatorClicked}">x </td>
+                    </tr>
+                    <tr>
+                        <td onclick="{!c.numberClicked}">4 </td>
+                        <td onclick="{!c.numberClicked}">5 </td>
+                        <td onclick="{!c.numberClicked}">6 </td>
+                        <td class="operator" onclick="{!c.operatorClicked}">+ </td>
+                    </tr>
+                    <tr>
+                        <td onclick="{!c.numberClicked}">1 </td>
+                        <td onclick="{!c.numberClicked}">2 </td>
+                        <td onclick="{!c.numberClicked}">3 </td>
+                        <td class="operator" onclick="{!c.operatorClicked}">- </td>
+                    </tr>
+                    <tr>
+                        <td onclick="{!c.numberClicked}">00 </td>
+                        <td onclick="{!c.numberClicked}">0</td>
+                        <td onclick="{!c.numberClicked}" data-value=".">. </td>
+                        <td class="operator" onclick="{!c.calculate}">= </td>
+                        
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </lightning:card>
+</aura:component>

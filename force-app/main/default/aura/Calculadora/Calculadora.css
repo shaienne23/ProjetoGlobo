@@ -1,0 +1,39 @@
+.THIS {
+}
+.THIS #ioDiv{
+    text-align: right;
+    background-color: #54787d;
+    color: white;
+    height: 110px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.THIS #inputDiv{
+    font-size: 20px;
+}
+.THIS #outputDiv{
+    font-size: 40px;
+}
+.THIS table{
+    border-collapse: separate;
+	border-spacing: 0px;
+}
+.THIS td{
+    text-align: center;
+    width:10%;
+    padding:20px 0px;
+    font-size: 20px;
+    background-color:#d0ecea;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    transition-property: border;
+  	transition-duration: 0.3s;
+  	transition-delay: 0s;
+}
+.THIS td:hover {
+  border: 2px solid blue;
+}
+.THIS .operator{
+    background-color: #9fd6d2;
+    color: black;
+}

@@ -1,30 +1,41 @@
 <template>
-    <lightning-card title="Cadastro" icon-name="custom:custom15">
-        <!-- Campos de entrada -->
-        <lightning-record-edit-form object-api-name="Account" onsuccess={handleSuccess}>
-            <lightning-input-field field-name="Name"></lightning-input-field>
-            <lightning-input-field field-name="Phone"></lightning-input-field>
-            <div>
-                <template if:true={areSendEmail}>
-                    <lightning-input-field field-name="Email__c" onchange={handleEmailChange}></lightning-input-field>
-                </template>
+    <main class="forms">
+        <lightning-card title="Cadastro Conta" icon-name="custom:custom15" class="cards">
 
-                <template if:false={areSendEmail}>
-                    Selecione o Checkbox, para cadastro e envio de Email!!
-                </template>
-            </div>
-            <lightning-input-field type="checkbox" label="Enviar Email" checked={sendEmail}
-                onchange={handleSendEmailChange}></lightning-input-field>
-            <div class="checkbox-wrapper">
-                <lightning-input type="checkbox" class="custom-checkbox" label="Cadastrar Email"
-                    onchange={handleChange}></lightning-input>
-            </div>
+            <!-- Adicione o identificador ao lightning-record-edit-form -->
+            <lightning-record-edit-form object-api-name="Account" onsuccess={handleSuccess}>
+                <lightning-messages></lightning-messages>
+                <div class="slds-col slds-p-horizontal_medium">
+                    <!-- Campos de entrada input -->
+                    <lightning-input-field field-name="Name" class="input"></lightning-input-field>
+                    <lightning-input-field field-name="Phone" class="input"></lightning-input-field>
+                    <lightning-input-field field-name="Active__c" class="input"></lightning-input-field>
+                    <lightning-input-field field-name="Type" class="input"></lightning-input-field>
 
+                    <!-- se estiver marcado o checkbox aparece o Campo de entrada email -->
+                    <template if:true={areSendEmail}>
+                        <lightning-input-field field-name="Email__c" class="input"
+                            onchange={handleEmailChange}></lightning-input-field>
+                    </template>
 
-            <!-- Exibição da mensagem -->
-            <div class="message">{message}</div>
-            <lightning-button class="slds-m-top_small" variant="brand" type="submit"
-                label="Criar Conta"></lightning-button>
-        </lightning-record-edit-form>
-    </lightning-card>
+                    <!-- campo checkbox para seleção Campo de entrada email -->
+                    <div class="checkbox-wrapper">
+                        <lightning-input type="checkbox" class="input" label="Cadastrar Email"
+                            onchange={handleChange}></lightning-input>
+                    </div>
+
+                    <template if:false={areSendEmail}>
+                        Selecione o Checkbox, para cadastro e envio de Email!!
+                    </template>
+
+                </div>
+                <!-- Exibição da mensagem 
+                <div class="message">{message}</div>
+                verificar se utilizando messages funcionaria ler documentação -->
+                <div class="custom-container">
+                    <lightning-button type="submit" label="Criar Conta"></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </lightning-card>
+    </main>
 </template>
